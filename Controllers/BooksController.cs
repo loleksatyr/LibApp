@@ -7,13 +7,15 @@ using LibApp.Models;
 using LibApp.ViewModels;
 using LibApp.Data;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace LibApp.Controllers
 {
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        public string name;
+ 
         public BooksController(ApplicationDbContext contex)
         {
             _context = contex;
@@ -50,9 +52,9 @@ namespace LibApp.Controllers
                 return NotFound();
             }
 
-            var viewModel = new BookFormViewModel
+            var viewModel = new BookFormViewModel(book)
             {
-                Book = book,
+                //Book = book,
                 Genres = _context.Genre.ToList()
             };
 
@@ -62,7 +64,7 @@ namespace LibApp.Controllers
         public IActionResult New()
         {
             var genres = _context.Genre.ToList();
-            var viewModel = new BookFormViewModel
+            var viewModel = new BookFormViewModel()
             {
                 Genres = genres
             };
