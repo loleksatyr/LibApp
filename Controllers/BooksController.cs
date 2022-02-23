@@ -30,6 +30,10 @@ namespace LibApp.Controllers
             return View(books);
         }
 
+        public IActionResult TestRest() {
+            return View();
+        }
+        
         public IActionResult Details(int id)
         {
             var book = _booksServices.GetBook(id);
