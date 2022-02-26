@@ -20,8 +20,8 @@ namespace LibApp.Controllers
 
         public BooksController(ApplicationDbContext context, IBooksServices booksServices)
         {
-           _context = context;
-           _booksServices = booksServices;
+            _context = context;
+            _booksServices = booksServices;
         }
 
         public IActionResult Index()
@@ -30,12 +30,9 @@ namespace LibApp.Controllers
             return View(books);
         }
 
-        public IActionResult TestRest() {
-            return View();
-        }
-        
         public IActionResult Details(int id)
         {
+
             var book = _booksServices.GetBook(id);
 
             if (book == null)
@@ -48,7 +45,7 @@ namespace LibApp.Controllers
 
         public IActionResult Edit(int id)
         {
-            var book = _booksServices.GetBook(id); 
+            var book = _booksServices.GetBook(id);
             if (book == null)
             {
                 return NotFound();
@@ -56,9 +53,9 @@ namespace LibApp.Controllers
 
             var viewModel = new BookFormViewModel(book)
             {
-                //Book = book,
                 Genres = _booksServices.GetGenres()
-        };
+            };
+
 
             return View("BookForm", viewModel);
         }
@@ -73,7 +70,6 @@ namespace LibApp.Controllers
 
             return View("BookForm", viewModel);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Save(Book book)
@@ -99,6 +95,9 @@ namespace LibApp.Controllers
 
             return RedirectToAction("Index", "Books");
         }
+
+
+
 
 
     }

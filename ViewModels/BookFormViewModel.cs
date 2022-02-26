@@ -28,11 +28,13 @@ namespace LibApp.ViewModels
         [Range(1,20)]
         public int NumberInStock { get; set; }
 
+        public DateTime ReleaseDate { get; set; }
 
-        public DateTime? ReleaseDate;
-        
+        public DateTime DateAdded { get; set; }
 
-        public string Title
+    //  public DateTime? DateAdded;
+    
+    public string Title
         {
             get
             {
@@ -41,11 +43,13 @@ namespace LibApp.ViewModels
         }
 
         public BookFormViewModel(Book book) {
-            book.Id = Id;
-            book.AuthorName = AuthorName;
-            book.Name = Name;
-            book.GenreId = GenreId;
-            book.ReleaseDate = (DateTime)ReleaseDate;
+            Id = book.Id;
+            AuthorName = book.AuthorName; 
+            Name = book.Name;
+            GenreId = book.GenreId;
+            NumberInStock = book.NumberInStock;
+            ReleaseDate = book.ReleaseDate;
+            DateAdded = book.DateAdded;
 
         }
         public BookFormViewModel() {

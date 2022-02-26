@@ -1,15 +1,48 @@
-@model LibApp.Models.Customer
-
 @{
-    ViewBag.Title = Model.Name;
+    //ViewBag.Title = Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
+<h2 id="name"></h2>
 <ul>
-    <li>Membership Type: @Model.MembershipType.Name</li>
-    @if (Model.Birthdate.HasValue)
-    {
-        <li>Birthdate: @Model.Birthdate.Value.ToShortDateString()</li>
-    }   
+    <li>Membership Type: <b><span id="member"></span></b> </li>
+
+
+    <li>Birthdate: <span id="birth"></span> </li>
+    <li>HasNewsletterSubscribed: <span id="news"></span> </li>
+
+    <p>
+        <a class="btn btn-primary" href="/customers/edit/" id="edit">Edit Customer</a>
+    </p>
 </ul>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $.get("/api/customers/@Model", function (data) {
+                console.log(data);
+                $("#name").append(data.name);
+                $("#member").append(data.membershipType.name);
+                if (data.birthdate != null) {
+                    $("#birth").append(data.birthdate);
+                }
+                else {
+                    $("#birth").append("Not specified");
+                }
+                if (data.hasNewsletterSubscribed == false) {
+                    $("#news").append("<strong>no</strong>");
+                }
+                else {
+                    $("#news").append("<strong>yes</strong>");
+                }
+                $("#edit").attr("href", "/customers/edit/" + data.id);
+                
+            });
+            
+
+
+
+
+       })
+    </script>
+}

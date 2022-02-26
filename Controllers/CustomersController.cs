@@ -13,12 +13,12 @@ namespace LibApp.Controllers
 {
     public class CustomersController : Controller
     {
-       // private readonly ApplicationDbContext _context;
+        // private readonly ApplicationDbContext _context;
         private readonly ICustomersServices _customersServices;
 
         public CustomersController(ApplicationDbContext contex, ICustomersServices customersServices)
         {
-           // _context = contex;
+            // _context = contex;
             _customersServices = customersServices;
         }
 
@@ -27,7 +27,8 @@ namespace LibApp.Controllers
             return View();
         }
 
-        public IActionResult Details(int id)
+        
+        public IActionResult DetailsApi(int id)
         {
             var customer = _customersServices.GetCustomerDetails(id);
 
@@ -36,8 +37,26 @@ namespace LibApp.Controllers
                 return Content("User not found");
             }
 
-            return View(customer);
+            //return View(customer);
+            return Json(customer);
+
+        
         }
+        public IActionResult Details(int id)
+        {
+          /*  var customer = _customersServices.GetCustomerDetails(id);
+
+            if (customer == null)
+            {
+                return Content("User not found");
+            }
+          */
+            return View(id);
+            //return Json(customer);
+
+
+        }
+
 
         public IActionResult New()
         {
@@ -95,5 +114,6 @@ namespace LibApp.Controllers
 
             return RedirectToAction("Index", "Customers");
         }
+
     }
 }

@@ -34,7 +34,7 @@ namespace LibApp.Controllers.Api
             var books = _context.Books
                                         .Include(c => c.Genre)
                                         .ToList()
-                                        .Select(_mapper.Map<Book, BookDto>);
+                                       .Select(_mapper.Map<Book, BookDto>);
 
             return Ok(books);
         }
@@ -69,24 +69,26 @@ namespace LibApp.Controllers.Api
             return bookDto;
         }
 
-        
+
         [HttpPut("{id}")]
-        public void UpdateBook(int id, BookDto bookdto)
+        public void UpdateBook(int id, BookDto bookDto)
         {
-            if (!ModelState.IsValid)
             {
-                throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
+                if (!ModelState.IsValid)
+                {
+                    throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
+                }
+
+                var bookInDb = _context.Customers.SingleOrDefault(c => c.Id == bookDto.Id);
+                if (bookInDb == null)
+                {
+                    throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
+                }
+
+
+                _mapper.Map(bookDto, bookInDb);
+                _context.SaveChanges();
             }
-
-            var bookdTo = _context.Customers.SingleOrDefault(c => c.Id == bookdto.Id);
-            if (bookdTo == null)
-            {
-                throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
-            }
-
-
-            _mapper.Map(bookdto, bookdTo);
-            _context.SaveChanges();
         }
         
         [HttpGet("genres")]
@@ -118,6 +120,10 @@ namespace LibApp.Controllers.Api
 
         private ApplicationDbContext _context;
         private readonly IMapper _mapper;
+
+ 
+        }
+      
     }
-}
+
 

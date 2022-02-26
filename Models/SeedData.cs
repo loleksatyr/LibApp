@@ -63,6 +63,7 @@ namespace LibApp.Models
                         Genre = context.Genre.First(x => x.Id == 1),
                         DateAdded = DateTime.Parse("2022/01/10"),
                         ReleaseDate = DateTime.Parse("1997/01/10"),
+                        NumberInStock = 1
                     },
                     new Book
                     {
@@ -71,6 +72,7 @@ namespace LibApp.Models
                         Genre = context.Genre.First(x => x.Id == 2),
                         DateAdded = DateTime.Parse("2022/02/20"),
                         ReleaseDate = DateTime.Parse("2022/02/20"),
+                        NumberInStock = 2
                     },       
                     new Book
                     {
@@ -79,6 +81,7 @@ namespace LibApp.Models
                         Genre = context.Genre.First(x => x.Id == 3),
                         DateAdded = DateTime.Parse("1949/06/20"),
                         ReleaseDate = DateTime.Parse("1949/06/20"),
+                        NumberInStock = 3
                     }
                 );
              
