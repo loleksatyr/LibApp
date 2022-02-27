@@ -13,8 +13,7 @@
     <thead>
         <tr>
             <th>Book</th>
-            <th>Genre</th>
-            <th>Details</th>
+            <th colspan="2">Genre</th>
         </tr>
     </thead>
     <tbody>
@@ -40,17 +39,11 @@
                     {
                         data: "name",
                         render: function (data, type, book) {
-                            return "<a href='books/Edit/" + book.id + "'>" + book.name + "</a>";
+                            return "<a href='books/details/" + book.id + "'>" + book.name + "</a>";
                         }
                     },
                     {
                         data: "genre.name"
-                    },
-                    {
-                        data: "name",
-                        render: function (data, type, book) {
-                            return "<a href='books/details/" + book.id + "'>" + "Details" + "</a>";
-                        }
                     },
                 ]
             });

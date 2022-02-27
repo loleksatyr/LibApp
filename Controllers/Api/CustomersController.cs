@@ -49,7 +49,7 @@ namespace LibApp.Controllers.Api
             {
                 throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
             }
-
+            
             return _mapper.Map<CustomerDto>(customer);
         }
 

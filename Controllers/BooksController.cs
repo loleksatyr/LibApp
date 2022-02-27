@@ -32,15 +32,15 @@ namespace LibApp.Controllers
 
         public IActionResult Details(int id)
         {
-
+            /*
             var book = _booksServices.GetBook(id);
 
             if (book == null)
             {
                 return Content("Book not found");
             }
-
-            return View(book);
+            */
+            return View(id);
         }
 
         public IActionResult Edit(int id)

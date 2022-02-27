@@ -1,6 +1,8 @@
+
 @{
-    //ViewBag.Title = Model.Name;
+    ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <h2 id="name"></h2>
@@ -10,7 +12,7 @@
 
     <li>Birthdate: <span id="birth"></span> </li>
     <li>HasNewsletterSubscribed: <span id="news"></span> </li>
-
+    <br />
     <p>
         <a class="btn btn-primary" href="/customers/edit/" id="edit">Edit Customer</a>
     </p>
@@ -22,6 +24,7 @@
             $.get("/api/customers/@Model", function (data) {
                 console.log(data);
                 $("#name").append(data.name);
+
                 $("#member").append(data.membershipType.name);
                 if (data.birthdate != null) {
                     $("#birth").append(data.birthdate);
@@ -36,9 +39,9 @@
                     $("#news").append("<strong>yes</strong>");
                 }
                 $("#edit").attr("href", "/customers/edit/" + data.id);
-                
+
             });
-            
+
 
 
 

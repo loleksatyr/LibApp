@@ -2,6 +2,7 @@
 using LibApp.Data;
 using LibApp.Dtos;
 using LibApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -43,7 +44,7 @@ namespace LibApp.Controllers.Api
         [HttpGet("{id}")]
         public BookDto GetBook(int id)
         {
-            var book = _context.Books.SingleOrDefault(c => c.Id == id);
+            var book = _context.Books.Include(c => c.Genre).SingleOrDefault(c => c.Id == id);
             if (book == null)
             {
                 throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);

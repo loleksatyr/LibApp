@@ -28,29 +28,17 @@ namespace LibApp.Controllers
         }
 
         
-        public IActionResult DetailsApi(int id)
-        {
-            var customer = _customersServices.GetCustomerDetails(id);
-
-            if (customer == null)
-            {
-                return Content("User not found");
-            }
-
-            //return View(customer);
-            return Json(customer);
-
-        
-        }
+       
         public IActionResult Details(int id)
         {
-          /*  var customer = _customersServices.GetCustomerDetails(id);
+            /*  var customer = _customersServices.GetCustomerDetails(id);
 
-            if (customer == null)
-            {
-                return Content("User not found");
-            }
-          */
+              if (customer == null)
+              {
+                  return Content("User not found");
+              }
+            */
+           
             return View(id);
             //return Json(customer);
 
